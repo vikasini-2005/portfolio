@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donuts House - Sweet & Delicious</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: #FF69B4;
+  --light-pink: #FFB6D9;
+  --cream: #FFF8E7;
+  --brown: #8B4513;
+  --dark: #2C1810;
+  --orange: #FF8C42;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+}
+
+/* Navigation */
+nav {
+  background: white;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  padding: 1rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--pink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  font-size: 36px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--pink);
+}
+
+.cart-btn {
+  background: var(--pink);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,105,180,0.4);
+}
+
+.cart-count {
+  background: white;
+  color: var(--pink);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--light-pink) 0%, var(--cream) 100%);
+  padding: 100px 5% 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-content h1 span {
+  color: var(--pink);
+}
+
+.hero-content p {
+  font-size: 18px;
+  color: var(--brown);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-primary {
+  background: var(--pink);
+  color: white;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: var(--dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255,105,180,0.3);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--pink);
+  border: 2px solid var(--pink);
+  padding: 14px 34px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: var(--pink);
+  color: white;
+}
+
+.hero-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donut-circle {
+  width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 180px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floating-badge {
+  position: absolute;
+  background: var(--orange);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(255,140,66,0.4);
+}
+
+.badge-1 {
+  top: 10%;
+  left: 10%;
+}
+
+.badge-2 {
+  bottom: 15%;
+  right: 10%;
+  background: var(--pink);
+}
+
+/* Features */
+.features {
+  padding: 80px 5%;
+  background: white;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 50px;
+}
+
+.section-title span {
+  color: var(--pink);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--cream);
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--brown);
+  line-height: 1.6;
+}
+
+/* Products */
+.products {
+  padding: 80px 5%;
+  background: var(--cream);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(255,105,180,0.3);
+}
+
+.product-image {
+  height: 220px;
+  background: linear-gradient(135deg, var(--light-pink), var(--cream));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+  position: relative;
+}
+
+.product-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--orange);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-info h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.product-info p {
+  color: var(--brown);
+  font-size: 13px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--pink);
+}
+
+.add-cart {
+  background: var(--pink);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-cart:hover {
+  background: var(--dark);
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 80px 5%;
+  background: white;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--cream);
+  padding: 30px;
+  border-radius: 20px;
+  border-left: 5px solid var(--pink);
+}
+
+.stars {
+  color: var(--orange);
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.testimonial-card p {
+  color: var(--brown);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.customer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  font-weight: 700;
+}
+
+.customer-info h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.customer-info span {
+  font-size: 13px;
+  color: var(--brown);
+}
+
+/* Footer */
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 60px 5% 30px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto 40px;
+}
+
+.footer-about h3 {
+  font-size: 28px;
+  color: var(--pink);
+  margin-bottom: 15px;
+}
+
+.footer-about p {
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,105,180,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.social-icon:hover {
+  background: var(--pink);
+}
+
+.footer-links h4 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--pink);
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--pink);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  text-align: center;
+  color: #999;
+}
+
+@media (max-width: 968px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .features-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">
+    <span>🍩</span>
+    Donuts House
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="cart-btn">
+    🛒 Cart
+    <span class="cart-count">3</span>
+  </button>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Freshly Baked <span>Happiness</span> Daily</h1>
+    <p>Indulge in our handcrafted donuts made with love and the finest ingredients. From classic glazed to creative flavors, there's a donut for everyone!</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Order Now</button>
+      <button class="btn-secondary">View Menu</button>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="donut-circle">🍩</div>
+    <div class="floating-badge badge-1">Fresh Daily ✨</div>
+    <div class="floating-badge badge-2">30+ Flavors</div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+  <h2 class="section-title">Why Choose <span>Donuts House?</span></h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🌟</div>
+      <h3>Premium Quality</h3>
+      <p>We use only the finest ingredients to ensure every bite is perfect</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚚</div>
+      <h3>Fast Delivery</h3>
+      <p>Get your donuts delivered fresh to your door in 30 minutes</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💝</div>
+      <h3>Made with Love</h3>
+      <p>Every donut is handcrafted with care by our expert bakers</p>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="products">
+  <h2 class="section-title">Our <span>Signature</span> Donuts</h2>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-image">
+        🍩
+        <span class="product-badge">Best Seller</span>
+      </div>
+      <div class="product-info">
+        <h3>Classic Glazed</h3>
+        <p>Light, fluffy, and perfectly sweet</p>
+        <div class="product-footer">
+          <span class="price">$2.99</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #8B4513, #D2691E);">
+        🍩
+        <span class="product-badge">Popular</span>
+      </div>
+      <div class="product-info">
+        <h3>Chocolate Dream</h3>
+        <p>Rich chocolate with sprinkles</p>
+        <div class="product-footer">
+          <span class="price">$3.49</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #FF1493, #FFB6D9);">
+        🍩
+      </div>
+      <div class="product-info">
+        <h3>Strawberry Bliss</h3>
+        <p>Fresh strawberry glaze</p>
+        <div class="product-footer">
+          <span class="price">$3.29</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #98FF98, #00FF7F);">
+        🍩
+        <span class="product-badge">New!</span>
+      </div>
+      <div class="product-info">
+        <h3>Matcha Green</h3>
+        <p>Premium matcha flavor</p>
+        <div class="product-footer">
+          <span class="price">$3.99</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+        🍩
+      </div>
+      <div class="product-info">
+        <h3>Caramel Delight</h3>
+        <p>Salted caramel perfection</p>
+        <div class="product-footer">
+          <span class="price">$3.69</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #E6E6FA, #DDA0DD);">
+        🍩
+      </div>
+      <div class="product-info">
+        <h3>Blueberry Burst</h3>
+        <p>Filled with blueberry jam</p>
+        <div class="product-footer">
+          <span class="price">$3.49</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #FFE4B5, #FFDAB9);">
+        🍩
+      </div>
+      <div class="product-info">
+        <h3>Maple Bacon</h3>
+        <p>Sweet and savory combo</p>
+        <div class="product-footer">
+          <span class="price">$4.29</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image" style="background: linear-gradient(135deg, #F0E68C, #FFD700);">
+        🍩
+        <span class="product-badge">Seasonal</span>
+      </div>
+      <div class="product-info">
+        <h3>Lemon Zest</h3>
+        <p>Tangy lemon glaze</p>
+        <div class="product-footer">
+          <span class="price">$3.49</span>
+          <button class="add-cart">Add +</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <h2 class="section-title">What Our <span>Customers</span> Say</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Absolutely the best donuts in town! The classic glazed is my go-to, and it never disappoints. Fresh and delicious every time!"</p>
+      <div class="customer">
+        <div class="customer-avatar">SM</div>
+        <div class="customer-info">
+          <h4>Sarah Miller</h4>
+          <span>Regular Customer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"The delivery is super fast and the donuts arrive fresh and warm. My kids absolutely love the chocolate dream flavor!"</p>
+      <div class="customer">
+        <div class="customer-avatar">JD</div>
+        <div class="customer-info">
+          <h4>James Davis</h4>
+          <span>Family Dad</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"I ordered donuts for our office party and everyone was impressed! Great variety and amazing quality. Highly recommend!"</p>
+      <div class="customer">
+        <div class="customer-avatar">EC</div>
+        <div class="customer-info">
+          <h4>Emma Chen</h4>
+          <span>Corporate Client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-about">
+      <h3>🍩 Donuts House</h3>
+      <p>Bringing sweet happiness to your doorstep since 2020. Made fresh daily with premium ingredients and lots of love.</p>
+      <div class="social-icons">
+        <div class="social-icon">f</div>
+        <div class="social-icon">ig</div>
+        <div class="social-icon">tw</div>
+        <div class="social-icon">yt</div>
+      </div>
+    </div>
+    
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Menu</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-links">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+1234567890">📞 +123 456 7890</a></li>
+        <li><a href="mailto:hello@donuts.com">📧 hello@donuts.com</a></li>
+        <li><a href="#">📍 123 Sweet Street</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>© 2025 Donuts House. All rights reserved. | Made with love 💕</p>
+  </div>
+</footer>
+
+<script>
+// Simple cart functionality
+let cartCount = 3;
+const addToCartBtns = document.querySelectorAll('.add-cart');
+const cartCountEl = document.querySelector('.cart-count');
+
+addToCartBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    cartCount++;
+    cartCountEl.textContent = cartCount;
+    btn.textContent = 'Added ✓';
+    btn.style.background = '#22d3ee';
+    
+    setTimeout(() => {
+      btn.textContent = 'Add +';
+      btn.style.background = '';
+    }, 1500);
+  });
+});
+
+// Product card click
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const productName = this.querySelector('h3').textContent;
+    alert(`View details for: ${productName}`);
+  });
+});
+</script>
+
+</body>
+</html>

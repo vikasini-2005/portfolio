@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serene - Wellness & Meditation App</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #7C3AED;
+  --secondary: #06B6D4;
+  --accent: #10B981;
+  --peach: #FBBF24;
+  --bg: #F8F7FF;
+  --white: #FFFFFF;
+  --dark: #1F2937;
+  --gray: #6B7280;
+  --light-purple: #EDE9FE;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.2rem 6%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 20px rgba(124,58,237,0.08);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray);
+  font-weight: 600;
+  transition: color 0.3s;
+  font-size: 15px;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.download-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(124,58,237,0.3);
+}
+
+/* Hero */
+.hero {
+  padding: 80px 6% 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(6,182,212,0.05));
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content h1 {
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: var(--dark);
+}
+
+.hero-content h1 span {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+  font-size: 19px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 35px;
+  max-width: 520px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-store {
+  background: var(--dark);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.btn-store:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124,58,237,0.3);
+}
+
+.app-preview {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-mockup {
+  width: 320px;
+  height: 640px;
+  background: white;
+  border-radius: 40px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+  padding: 12px;
+  position: relative;
+  border: 8px solid var(--dark);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  background: linear-gradient(180deg, var(--light-purple) 0%, white 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.floating-element {
+  position: absolute;
+  border-radius: 20px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.element-1 {
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--peach), var(--accent));
+  opacity: 0.2;
+  animation-delay: 0s;
+}
+
+.element-2 {
+  bottom: -30px;
+  left: -30px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0.2;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Features */
+.features {
+  padding: 100px 6%;
+  background: white;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.section-badge {
+  display: inline-block;
+  background: var(--light-purple);
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 18px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 40px 30px;
+  background: var(--bg);
+  border-radius: 24px;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 15px 40px rgba(124,58,237,0.15);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 25px;
+  box-shadow: 0 10px 30px rgba(124,58,237,0.2);
+}
+
+.feature-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  color: var(--gray);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* Meditation Programs */
+.programs {
+  padding: 100px 6%;
+  background: var(--bg);
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.program-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(124,58,237,0.2);
+}
+
+.program-image {
+  height: 200px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  position: relative;
+}
+
+.program-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255,255,255,0.95);
+  color: var(--primary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.program-content {
+  padding: 25px;
+}
+
+.program-category {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.program-content h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.program-content p {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.program-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--bg);
+}
+
+.program-duration {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+.program-start {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.program-start:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 100px 6%;
+  background: white;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--bg);
+  padding: 35px 30px;
+  border-radius: 20px;
+  position: relative;
+}
+
+.quote-icon {
+  font-size: 48px;
+  color: var(--primary);
+  opacity: 0.3;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.stars {
+  color: var(--peach);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.testimonial-text {
+  color: var(--dark);
+  line-height: 1.8;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.author-info h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.author-info p {
+  font-size: 13px;
+  color: var(--gray);
+}
+
+/* CTA Section */
+.cta {
+  padding: 100px 6%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  text-align: center;
+  color: white;
+}
+
+.cta h2 {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  opacity: 0.95;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-white {
+  background: white;
+  color: var(--primary);
+  border: none;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 60px 6% 30px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-brand h3 {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-brand p {
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(124,58,237,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.social-icon:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+.footer-section h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 12px;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 968px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">
+    🧘‍♀️ Serene
+  </div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#download">Download</a></li>
+  </ul>
+  <button class="download-btn">Download App</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Find Your <span>Inner Peace</span> Daily</h1>
+    <p>Transform your mental wellness with guided meditation, mindfulness exercises, and sleep stories designed by experts.</p>
+    
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">10M+</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Meditations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">4.9★</div>
+        <div class="stat-label">App Rating</div>
+      </div>
+    </div>
+    
+    <div class="hero-buttons">
+      <button class="btn-store">
+        <span style="font-size: 24px;">📱</span>
+        App Store
+      </button>
+      <button class="btn-store">
+        <span style="font-size: 24px;">🤖</span>
+        Google Play
+      </button>
+    </div>
+  </div>
+  
+  <div class="app-preview">
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <div style="padding: 30px; text-align: center;">
+          <div style="font-size: 64px; margin-top: 80px;">🧘‍♀️</div>
+          <h3 style="font-size: 24px; font-weight: 800; margin: 20px 0; color: var(--primary);">Welcome to Serene</h3>
+          <p style="color: var(--gray); font-size: 14px; margin-bottom: 30px;">Your journey to mindfulness starts here</p>
+          <div style="background: var(--primary); color: white; padding: 14px; border-radius: 50px; font-weight: 700;">Start Meditating</div>
+        </div>
+      </div>
+    </div>
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="section-header">
+    <div class="section-badge">✨ Features</div>
+    <h2 class="section-title">Everything You Need for Wellness</h2>
+    <p class="section-subtitle">Powerful tools to help you achieve mental clarity, reduce stress, and sleep better</p>
+  </div>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🧘</div>
+      <h3>Guided Meditations</h3>
+      <p>500+ expertly crafted meditation sessions for every need and experience level</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">😴</div>
+      <h3>Sleep Stories</h3>
+      <p>Soothing bedtime stories and sounds to help you fall asleep peacefully</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🎵</div>
+      <h3>Calming Music</h3>
+      <p>Curated soundscapes and music designed to reduce stress and anxiety</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Progress Tracking</h3>
+      <p>Monitor your mindfulness journey with detailed insights and statistics</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">⏰</div>
+      <h3>Daily Reminders</h3>
+      <p>Gentle notifications to help you maintain a consistent practice</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🌙</div>
+      <h3>Dark Mode</h3>
+      <p>Beautiful dark theme perfect for evening meditation sessions</p>
+    </div>
+  </div>
+</section>
+
+<!-- Programs -->
+<section class="programs" id="programs">
+  <div class="section-header">
+    <div class="section-badge">🎯 Programs</div>
+    <h2 class="section-title">Popular Meditation Programs</h2>
+    <p class="section-subtitle">Structured courses designed to help you build lasting mindfulness habits</p>
+  </div>
+  
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="program-image" style="background: linear-gradient(135deg, #7C3AED, #06B6D4);">
+        🌅
+        <span class="program-badge">Beginner</span>
+      </div>
+      <div class="program-content">
+        <div class="program-category">Foundation</div>
+        <h3>7-Day Meditation Basics</h3>
+        <p>Perfect introduction to meditation for complete beginners. Learn the fundamentals step by step.</p>
+        <div class="program-meta">
+          <div class="program-duration">
+            ⏱️ 7 days
+          </div>
+          <button class="program-start">Start Free</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="program-card">
+      <div class="program-image" style="background: linear-gradient(135deg, #10B981, #06B6D4);">
+        😌
+        <span class="program-badge">Popular</span>
+      </div>
+      <div class="program-content">
+        <div class="program-category">Stress Relief</div>
+        <h3>Stress & Anxiety Relief</h3>
+        <p>Techniques to manage stress, calm your mind, and find peace in difficult moments.</p>
+        <div class="program-meta">
+          <div class="program-duration">
+            ⏱️ 14 days
+          </div>
+          <button class="program-start">Start Free</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="program-card">
+      <div class="program-image" style="background: linear-gradient(135deg, #FBBF24, #F59E0B);">
+        😴
+      </div>
+      <div class="program-content">
+        <div class="program-category">Sleep</div>
+        <h3>Better Sleep Program</h3>
+        <p>Improve your sleep quality with bedtime meditations and relaxation techniques.</p>
+        <div class="program-meta">
+          <div class="program-duration">
+            ⏱️ 10 days
+          </div>
+          <button class="program-start">Start Free</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="program-card">
+      <div class="program-image" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">
+        ❤️
+      </div>
+      <div class="program-content">
+        <div class="program-category">Mindfulness</div>
+        <h3>Self-Love & Compassion</h3>
+        <p>Develop a kinder relationship with yourself through guided loving-kindness practices.</p>
+        <div class="program-meta">
+          <div class="program-duration">
+            ⏱️ 21 days
+          </div>
+          <button class="program-start">Start Free</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="program-card">
+      <div class="program-image" style="background: linear-gradient(135deg, #3B82F6, #06B6D4);">
+        🎯
+      </div>
+      <div class="program-content">
+        <div class="program-category">Focus</div>
+        <h3>Productivity & Focus</h3>
+        <p>Enhance concentration and mental clarity for peak performance at work and study.</p>
+        <div class="program-meta">
+          <div class="program-duration">
+            ⏱️ 14 days
+          </div>
+          <button class="program-start">Start Free</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="program-card">
+      <div class="program-image" style="background: linear-gradient(135deg, #14B8A6, #10B981);">
+        🌟
+        <span class="program-badge">Advanced</span>
+      </div>
+      <div class="program-content">
+        <div class="program-category">Advanced</div>
+        <h3>Mindful Living Mastery</h3>
+        <p>Deep dive into advanced mindfulness practices for experienced meditators.</p>
+        <div class="program-meta">
+          <div class="program-duration">
+            ⏱️ 30 days
+          </div>
+          <button class="program-start">Start Free</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="section-header">
+    <div class="section-badge">💬 Testimonials</div>
+    <h2 class="section-title">What Our Users Say</h2>
+    <p class="section-subtitle">Join millions of people finding peace and clarity with Serene</p>
+  </div>
+  
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"This app has completely changed my life. I used to struggle with anxiety, but now I feel so much calmer and centered. The sleep stories are a game changer!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">EM</div>
+        <div class="author-info">
+          <h4>Emily Martinez</h4>
+          <p>User for 6 months</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"As someone new to meditation, I was nervous to start. Serene made it so easy and approachable. The guided sessions are perfect for beginners!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background: linear-gradient(135deg, #10B981, #06B6D4);">DK</div>
+        <div class="author-info">
+          <h4>David Kim</h4>
+          <p>User for 3 months</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I've tried many meditation apps, but Serene is by far the best. The variety of programs and beautiful interface keep me coming back every day."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">SP</div>
+        <div class="author-info">
+          <h4>Sarah Patel</h4>
+          <p>User for 1 year</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="download">
+  <h2>Start Your Wellness Journey Today</h2>
+  <p>Download Serene now and get 7 days of premium access absolutely free. No credit card required.</p>
+  <div class="cta-buttons">
+    <button class="btn-white">
+      Download for iOS
+    </button>
+    <button class="btn-white">
+      Download for Android
+    </button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>🧘‍♀️ Serene</h3>
+      <p>Your personal guide to meditation, mindfulness, and better sleep. Join millions on the path to inner peace.</p>
+      <div class="social-icons">
+        <div class="social-icon">f</div>
+        <div class="social-icon">ig</div>
+        <div class="social-icon">tw</div>
+        <div class="social-icon">yt</div>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>App</h4>
+      <ul>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Programs</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Download</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>© 2025 Serene Wellness. All rights reserved. Made with 💜 for your wellbeing.</p>
+  </div>
+</footer>
+
+<script>
+// Program cards interaction
+document.querySelectorAll('.program-start').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    alert('Starting program... (Demo)');
+  });
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helper - Your Personal Assistant</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6366F1;
+  --secondary: #EC4899;
+  --accent: #14B8A6;
+  --dark: #0F172A;
+  --dark-2: #1E293B;
+  --gray: #64748B;
+  --light: #F1F5F9;
+  --white: #FFFFFF;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 1rem 6%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+  color: var(--primary);
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99,102,241,0.3);
+}
+
+/* Hero */
+.hero {
+  padding: 100px 6% 80px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.05) 0%, rgba(236,72,153,0.05) 100%);
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(99,102,241,0.1);
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  border: 1px solid rgba(99,102,241,0.2);
+}
+
+.hero h1 {
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 20px;
+  color: var(--gray);
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(99,102,241,0.3);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 14px 38px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.hero-demo {
+  margin-top: 60px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  padding: 40px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Features */
+.features {
+  padding: 100px 6%;
+  background: white;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-badge {
+  display: inline-block;
+  background: rgba(99,102,241,0.1);
+  color: var(--primary);
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--light);
+  padding: 40px 30px;
+  border-radius: 16px;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 12px 35px rgba(99,102,241,0.15);
+}
+
+.feature-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.feature-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--gray);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* How it works */
+.how-it-works {
+  padding: 100px 6%;
+  background: var(--dark);
+  color: white;
+}
+
+.how-it-works .section-badge {
+  background: rgba(99,102,241,0.2);
+  color: var(--accent);
+}
+
+.how-it-works .section-title {
+  color: white;
+}
+
+.how-it-works .section-subtitle {
+  color: rgba(255,255,255,0.7);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  z-index: 0;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 900;
+  margin: 0 auto 25px;
+  box-shadow: 0 10px 30px rgba(99,102,241,0.3);
+}
+
+.step h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.step p {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Task Manager Demo */
+.task-demo {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.task-header h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.add-task-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.add-task-btn:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
+}
+
+.task-list {
+  list-style: none;
+}
+
+.task-item {
+  background: var(--light);
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  background: rgba(99,102,241,0.08);
+  transform: translateX(5px);
+}
+
+.task-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-checkbox.checked {
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.task-content p {
+  font-size: 13px;
+  color: var(--gray);
+}
+
+.task-priority {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.priority-high {
+  background: rgba(239,68,68,0.1);
+  color: #EF4444;
+}
+
+.priority-medium {
+  background: rgba(245,158,11,0.1);
+  color: #F59E0B;
+}
+
+.priority-low {
+  background: rgba(16,185,129,0.1);
+  color: #10B981;
+}
+
+/* Pricing */
+.pricing {
+  padding: 100px 6%;
+  background: var(--light);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 35px;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 15px 40px rgba(99,102,241,0.2);
+}
+
+.pricing-card.featured {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+  transform: scale(1.08) translateY(-10px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  right: 35px;
+  background: var(--accent);
+  color: white;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pricing-card h3 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.pricing-card p {
+  color: var(--gray);
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.pricing-card.featured p {
+  color: rgba(255,255,255,0.9);
+}
+
+.price {
+  font-size: 52px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.price span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.price-period {
+  font-size: 16px;
+  color: var(--gray);
+  margin-bottom: 30px;
+}
+
+.pricing-card.featured .price-period {
+  color: rgba(255,255,255,0.8);
+}
+
+.features-list {
+  list-style: none;
+  margin-bottom: 35px;
+}
+
+.features-list li {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--light);
+  font-size: 15px;
+}
+
+.pricing-card.featured .features-list li {
+  border-bottom-color: rgba(255,255,255,0.2);
+}
+
+.pricing-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid var(--primary);
+  background: var(--primary);
+  color: white;
+}
+
+.pricing-card.featured .pricing-btn {
+  background: white;
+  color: var(--primary);
+  border-color: white;
+}
+
+.pricing-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.3);
+}
+
+/* Footer */
+footer {
+  background: var(--dark-2);
+  color: white;
+  padding: 60px 6% 30px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-brand h3 {
+  font-size: 26px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+}
+
+.footer-brand p {
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background: rgba(99,102,241,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.social-link:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+.footer-section h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 12px;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 968px) {
+  .features-grid,
+  .steps,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .steps::before {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">
+    🎯 Helper
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✨ Your AI-Powered Assistant</div>
+    <h1>Organize Your Life <span>Effortlessly</span></h1>
+    <p>The ultimate productivity platform that helps you manage tasks, track goals, and stay organized. Boost your efficiency by 10x with intelligent automation.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">
+        Start Free Trial
+        <span>→</span>
+      </button>
+      <button class="btn-secondary">Watch Demo</button>
+    </div>
+    
+    <div class="hero-demo">
+      <div class="task-demo">
+        <div class="task-header">
+          <h3>Today's Tasks</h3>
+          <button class="add-task-btn">
+            <span>+</span>
+            Add Task
+          </button>
+        </div>
+        <ul class="task-list">
+          <li class="task-item">
+            <div class="task-checkbox checked">✓</div>
+            <div class="task-content">
+              <h4>Complete project proposal</h4>
+              <p>Due today at 5:00 PM</p>
+            </div>
+            <span class="task-priority priority-high">High</span>
+          </li>
+          <li class="task-item">
+            <div class="task-checkbox"></div>
+            <div class="task-content">
+              <h4>Team meeting preparation</h4>
+              <p>Tomorrow at 10:00 AM</p>
+            </div>
+            <span class="task-priority priority-medium">Medium</span>
+          </li>
+          <li class="task-item">
+            <div class="task-checkbox"></div>
+            <div class="task-content">
+              <h4>Review design mockups</h4>
+              <p>This week</p>
+            </div>
+            <span class="task-priority priority-low">Low</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="section-header">
+    <div class="section-badge">Features</div>
+    <h2 class="section-title">Everything You Need</h2>
+    <p class="section-subtitle">Powerful tools to help you stay organized and productive every single day</p>
+  </div>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3>Task Management</h3>
+      <p>Create, organize, and prioritize tasks with our intuitive interface. Set deadlines and track progress effortlessly.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>Smart Calendar</h3>
+      <p>Sync all your calendars in one place. Get intelligent scheduling suggestions based on your habits.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <h3>Smart Reminders</h3>
+      <p>Never miss a deadline with AI-powered reminders that adapt to your schedule and priorities.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>Team Collaboration</h3>
+      <p>Work together seamlessly. Share tasks, assign responsibilities, and track team progress in real-time.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Analytics & Insights</h3>
+      <p>Get detailed reports on your productivity. Identify patterns and optimize your workflow.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>Secure & Private</h3>
+      <p>Your data is encrypted and protected. We never share your information with third parties.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how-it-works">
+  <div class="section-header">
+    <div class="section-badge">Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Get started in minutes and transform your productivity</p>
+  </div>
+  
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Sign Up</h3>
+      <p>Create your free account in seconds. No credit card required.</p>
+    </div>
+    
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Add Tasks</h3>
+      <p>Import your existing tasks or create new ones with our simple interface.</p>
+    </div>
+    
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Organize</h3>
+      <p>Categorize, prioritize, and schedule your tasks for maximum efficiency.</p>
+    </div>
+    
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Achieve</h3>
+      <p>Complete your tasks and reach your goals with our productivity tools.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="section-header">
+    <div class="section-badge">Pricing</div>
+    <h2 class="section-title">Choose Your Plan</h2>
+    <p class="section-subtitle">Flexible pricing for individuals and teams of all sizes</p>
+  </div>
+  
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Free</h3>
+      <p>Perfect for getting started</p>
+      <div class="price">$0<span>/mo</span></div>
+      <div class="price-period">Forever free</div>
+      <ul class="features-list">
+        <li>✓ Up to 50 tasks</li>
+        <li>✓ Basic task management</li>
+        <li>✓ Mobile app access</li>
+        <li>✓ Email support</li>
+      </ul>
+      <button class="pricing-btn">Get Started</button>
+    </div>
+    
+    <div class="pricing-card featured">
+      <span class="popular-badge">Most Popular</span>
+      <h3>Pro</h3>
+      <p>For serious productivity</p>
+      <div class="price">$12<span>/mo</span></div>
+      <div class="price-period">Billed annually</div>
+      <ul class="features-list">
+        <li>✓ Unlimited tasks</li>
+        <li>✓ Advanced analytics</li>
+        <li>✓ Team collaboration</li>
+        <li>✓ Priority support</li>
+        <li>✓ Custom integrations</li>
+      </ul>
+      <button class="pricing-btn">Start Free Trial</button>
+    </div>
+    
+    <div class="pricing-card">
+      <h3>Enterprise</h3>
+      <p>For large organizations</p>
+      <div class="price">$49<span>/mo</span></div>
+      <div class="price-period">Per team member</div>
+      <ul class="features-list">
+        <li>✓ Everything in Pro</li>
+        <li>✓ Dedicated support</li>
+        <li>✓ Custom training</li>
+        <li>✓ Advanced security</li>
+        <li>✓ SLA guarantee</li>
+      </ul>
+      <button class="pricing-btn">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>🎯 Helper</h3>
+      <p>Your personal AI-powered assistant for managing tasks, staying organized, and achieving your goals.</p>
+      <div class="social-links">
+        <div class="social-link">f</div>
+        <div class="social-link">tw</div>
+        <div class="social-link">in</div>
+        <div class="social-link">ig</div>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#">Updates</a></li>
+        <li><a href="#">Roadmap</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">API</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>© 2025 Helper. All rights reserved. Built with ❤️ for productivity.</p>
+  </div>
+</footer>
+
+<script>
+// Task checkbox functionality
+document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.classList.toggle('checked');
+    if (this.classList.contains('checked')) {
+      this.innerHTML = '✓';
+    } else {
+      this.innerHTML = '';
+    }
+  });
+});
+
+// Add task button
+document.querySelector('.add-task-btn').addEventListener('click', function() {
+  alert('Add Task feature coming soon!');
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
